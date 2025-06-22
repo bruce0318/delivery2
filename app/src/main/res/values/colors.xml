@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="myblue">#63B8FF</color>
+    <!-- res/values/colors.xml -->
+    <color name="scrollbar_color">#00000000</color>  <!-- 半透明黑色 -->
+    <color name="defaultblue">#2F3A8F</color>
+    <color name="white_toming">#00FFFFFF</color>
+    <color name="card_background">#F8F8F8</color>
+    <color name="primary">#2F3A8F</color>
+    <color name="theme_blue">#2F3A8F</color>
+    <color name="gray">#888888</color>
+    <color name="gray_light">#CCCCCC</color>
+    <color name="gray_dark">#666666</color>
+    <color name="red">#A91717</color>
+    <color name="yellow">#DCCB30</color>
+    <color name="green">#8BC34A</color>
+
+
+</resources>

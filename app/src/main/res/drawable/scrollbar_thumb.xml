@@ -1,0 +1,5 @@
+<!-- res/drawable/scrollbar_thumb.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/scrollbar_color" />  <!-- 引用颜色资源 -->
+    <corners android:radius="4dp" />  <!-- 圆角样式 -->
+</shape>

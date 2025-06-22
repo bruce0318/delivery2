@@ -1,0 +1,6 @@
+<!-- res/color/button_tint_selector.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="#2F3A8F" android:state_selected="true"/>
+    <item android:color="#2F3A8F" android:state_pressed="true"/>
+    <item android:color="#808080"/> <!-- 默认灰色 -->
+</selector>

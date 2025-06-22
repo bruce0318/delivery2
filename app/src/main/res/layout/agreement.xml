@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:gravity="center"
+        android:text="会员协议"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/autoCompleteTextView2" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="15dp"
+        android:text="
+版本：1.0\n
+发布日期：2024年09月10日\n\n
+尊敬的用户，欢迎您使用我们的APP（以下简称“本APP”）。本APP旨在为视障人士、其亲属以及志愿者提供一个便捷的沟通与服务平台。在使用本APP之前，请仔细阅读并理解本协议的全部内容。一旦您开始使用本APP，即表示您已阅读、理解并同意接受本协议的所有条款和条件。\n\n
+一、服务内容\n
+1. 本APP提供以下服务：\n
+   - 为视障人士提供语音辅助、障碍检测、定位导航、紧急联系和求助志愿者等服务。\n
+   - 为亲属端用户提供视障人士位置共享、长期停留通知、查看志愿者帮助记录等服务。\n
+   - 为志愿者端用户提供视障人士需求匹配、查看志愿服务记录等服务。\n\n
+二、权限要求\n
+1. 为了提供上述服务，本APP需要您授权以下权限：\n
+   - 通话权限：用于紧急情况下的通话服务。\n
+   - 短信权限：用于接收和发送验证码、通知等。\n
+   - 定位权限：用于提供定位导航服务。\n
+   - 摄像头权限：用于视障人士端的物体识别服务。\n
+   - 麦克风权限：用于语音输入和语音辅助服务。\n
+2. 您理解并同意，上述权限的获取是为了更好地为您提供服务，我们将严格遵守相关法律法规，保护您的隐私和数据安全。\n\n
+三、验证码服务\n
+1. 本APP的验证码服务由MobTech提供。您同意在注册、登录或进行特定操作时，接收由MobTech发送的验证码。\n
+2. 您理解并同意，MobTech可能会根据其服务条款收集和使用您的手机号码等信息，以提供验证码服务。\n\n
+四、用户义务\n
+1. 您应保证提供的所有注册信息真实、准确、完整，如有变更，应及时更新。\n
+2. 您应妥善保管您的账户信息，不得将账户信息泄露给任何第三方。\n
+3. 您应遵守法律法规，不得利用本APP进行任何违法活动。\n\n
+五、隐私政策\n
+1. 我们重视您的隐私权。本APP将按照《隐私政策》的规定收集、使用和保护您的个人信息。\n
+2. 您同意本APP按照《隐私政策》的规定处理您的个人信息。\n\n
+六、免责声明\n
+1. 本APP提供的服务可能受到网络环境、设备性能等因素的影响，我们不保证服务的无中断性和绝对安全性。\n
+2. 对于因不可抗力、第三方行为等原因导致的服务中断或数据丢失，本APP不承担责任。\n\n
+七、协议的修改和终止\n
+1. 我们保留随时修改本协议的权利。一旦本协议的内容发生变更，我们将通过本APP通知您。\n
+2. 如果您不同意修改后的协议内容，您有权停止使用本APP。继续使用本APP将被视为接受修改后的协议。\n\n
+八、法律适用和争议解决\n
+1. 本协议的订立、执行和解释及争议的解决均适用中华人民共和国法律。\n
+2. 如发生任何争议，双方应首先通过友好协商解决；协商不成时，任何一方均可向本APP所在地的人民法院提起诉讼。\n\n
+九、其他\n
+1. 本协议未尽事宜，双方可另行协商解决。\n
+2. 本协议的最终解释权归本APP所有。\n\n
+接受并遵守本协议\n
+通过点击“已阅读会员协议”或开始使用本APP，您确认已阅读、理解并同意接受本协议的所有条款和条件。如果您不同意本协议的任何内容，请不要使用本APP。\n\n
+本APP团队\n
+2024年09月10日\n"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

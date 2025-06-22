@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.users.RegisterActivity"
+    >
+
+    <!-- 标题 -->
+
+    <!-- 滚动视图 -->
+
+    <TextView
+        android:id="@+id/text_inf_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="用户注册"
+        android:textColor="#000000"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="20dp"
+        android:scrollbars="vertical"
+        android:scrollbarStyle="insideOverlay"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:scrollbarThumbVertical="@drawable/scrollbar_thumb"
+        android:fadeScrollbars="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_inf_title">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 用户名 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="用户名"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="16dp">
+            </TextView>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="请输入用户名"
+                    android:inputType="textPersonName"
+                    android:background="@drawable/rounded_edittext_background"
+                    android:textSize="14dp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- 密码 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="密码"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="16dp">
+            </TextView>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pwo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="请输入密码"
+                    android:inputType="textPassword"
+                    android:background="@drawable/rounded_edittext_background"
+                    android:textSize="14dp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- 手机号 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="手机号"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="16dp">
+            </TextView>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="请输入您的手机号"
+                    android:textSize="14dp"
+                    android:inputType="phone"
+                    android:background="@drawable/rounded_edittext_background" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- 获取验证码按钮和验证码输入框放在一行 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <!-- 验证码 -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="0dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editcode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_edittext_background"
+                        android:hint="请输入四位数的验证码"
+                        android:inputType="number"
+                        android:textSize="14dp"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- 添加一个空隙 -->
+                <Space
+                    android:layout_width="16dp"
+                    android:layout_height="wrap_content" />
+
+                <!-- 获取验证码按钮 -->
+                <Button
+                    android:id="@+id/btn_getcode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="0dp"
+                    android:backgroundTint="#2F3A8F"
+                    android:text="获取验证码"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/rounded_edittext_background" />
+            </LinearLayout>
+
+            <!-- 身份选择 -->
+            <TextView
+                android:id="@+id/sex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="身份"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+
+                <!--确定身份信息-->
+                <RadioGroup
+                    android:id="@+id/roleq"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/ButtonN"
+                        android:layout_width="11dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="视障人士"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <RadioButton
+                        android:id="@+id/ButtonV"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="志愿者"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <RadioButton
+                        android:id="@+id/ButtonRe"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="亲属"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="match_parent"
+                android:layout_height="5dp">
+            </com.google.android.material.imageview.ShapeableImageView>
+
+
+            <!-- 会员协议 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:id="@+id/checkBox3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="已阅读会员协议"
+                    android:layout_marginBottom="8dp" />
+                <!-- 添加一个空隙 -->
+                <Space
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="#ff4169E1"
+                    android:text="会员协议"
+                    android:layout_marginBottom="16dp" />
+            </LinearLayout>
+
+
+            <!-- 注册按钮 -->
+            <Button
+                android:id="@+id/buttonR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="#2F3A8F"
+                android:text="注册"
+                android:textColor="@android:color/white"
+                android:background="@drawable/rounded_edittext_background" />
+
+            <!-- 返回按钮 -->
+            <Button
+                android:id="@+id/buttonB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="#2F3A8F"
+                android:text="返回"
+                android:textColor="@android:color/white"
+                android:background="@drawable/rounded_edittext_background" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
