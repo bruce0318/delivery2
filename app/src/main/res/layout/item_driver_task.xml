@@ -19,7 +19,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="运输任务"
-            android:textSize="18sp"
+            android:textColor="@color/primary"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
 
@@ -40,23 +41,17 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@mipmap/locationpurple"
-                app:tint="@color/green" />
+                app:tint="#43C1FA" />
 
             <TextView
                 android:id="@+id/tv_start_point"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:textColor="@color/gray_dark"
                 android:text="起点: "
                 android:textSize="16sp" />
         </LinearLayout>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/arrow_d"
-            android:layout_marginStart="12dp"
-            android:layout_gravity="left"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,7 +64,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@mipmap/locationred"
-                app:tint="@color/red" />
+                app:tint="@color/defaultblue" />
 
             <TextView
                 android:id="@+id/tv_end_point"
@@ -91,7 +86,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/clock"
-                app:tint="@color/gray" />
+                app:tint="#424242" />
 
             <TextView
                 android:id="@+id/tv_task_date"
@@ -103,4 +98,4 @@
         </LinearLayout>
 
     </LinearLayout>
-</androidx.cardview.widget.CardView> 
+</androidx.cardview.widget.CardView>

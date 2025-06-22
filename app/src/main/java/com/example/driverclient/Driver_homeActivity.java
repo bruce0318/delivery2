@@ -351,8 +351,18 @@ public class Driver_homeActivity extends AppCompatActivity implements AMapLocati
 
                 runOnUiThread(() -> {
                     if(!allFeaturePoints.isEmpty()){
-                        addMarker(allFeaturePoints.get(0), "起点", R.drawable.locationpink);
-                        addMarker(allFeaturePoints.get(allFeaturePoints.size() - 1), "终点", R.drawable.location_button);
+                        JSONObject properties = feature.getJSONObject("properties");
+                        if(properties != null){
+                           fetchPointName(properties.getString("start_id"), name -> {
+                               addMarker(allFeaturePoints.get(0), name, "起点", R.drawable.locationpink);
+                           });
+                           fetchPointName(properties.getString("end_id"), name -> {
+                               addMarker(allFeaturePoints.get(allFeaturePoints.size() - 1), name, "终点", R.drawable.location_button);
+                           });
+                        } else {
+                             addMarker(allFeaturePoints.get(0), "起点", "路线起点", R.drawable.locationpink);
+                             addMarker(allFeaturePoints.get(allFeaturePoints.size() - 1), "终点", "路线终点", R.drawable.location_button);
+                        }
                     }
                 });
             }
@@ -362,10 +372,40 @@ public class Driver_homeActivity extends AppCompatActivity implements AMapLocati
         }
     }
 
-    private void addMarker(LatLng position, String title, int iconResId) {
+    private void fetchPointName(String pid, PointNameCallback callback) {
+        if (pid == null || pid.isEmpty()) {
+            runOnUiThread(() -> callback.onNameFetched("未知站点"));
+            return;
+        }
+        new Thread(() -> {
+            try {
+                String url = serverURL + "/point";
+                JSONObject requestBody = new JSONObject();
+                requestBody.put("pid", pid);
+                String response = NetworkHandler.post(url, requestBody.toString());
+                if (response != null && !response.startsWith("IOException")) {
+                    JSONObject json = JSONObject.parseObject(response);
+                    if (json.getIntValue("status_code") == 200) {
+                        runOnUiThread(() -> callback.onNameFetched(json.getString("name")));
+                        return;
+                    }
+                }
+            } catch (Exception e) {
+                Log.e("Driver_home", "Failed to fetch point name", e);
+            }
+            runOnUiThread(() -> callback.onNameFetched("未知站点"));
+        }).start();
+    }
+
+    interface PointNameCallback {
+        void onNameFetched(String name);
+    }
+
+    private void addMarker(LatLng position, String title, String snippet, int iconResId) {
         aMap.addMarker(new MarkerOptions()
                 .position(position)
                 .title(title)
+                .snippet(snippet)
                 .icon(BitmapDescriptorFactory.fromResource(iconResId))
         );
     }

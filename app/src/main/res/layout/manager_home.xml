@@ -68,6 +68,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="起点 (类型1)"
+                                android:textColor="@color/gray_dark"
                                 android:textSize="14sp"
                                 android:textStyle="bold"
                                 android:layout_marginBottom="4dp"/>
@@ -91,6 +92,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="终点 (类型2)"
+                                android:textColor="@color/gray_dark"
                                 android:textSize="14sp"
                                 android:textStyle="bold"
                                 android:layout_marginBottom="4dp"/>
@@ -114,7 +116,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="日期"
-                            android:textSize="14sp"
+                            android:textColor="@color/primary"
+                            android:textSize="16sp"
                             android:textStyle="bold"
                             android:layout_marginEnd="8dp"
                             android:layout_gravity="center_vertical"/>
@@ -169,4 +172,4 @@
         app:itemIconSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout> 
+</androidx.constraintlayout.widget.ConstraintLayout>

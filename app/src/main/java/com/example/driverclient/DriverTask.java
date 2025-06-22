@@ -7,6 +7,7 @@ public class DriverTask {
     private int driverOrder;
     private String startId;
     private String endId;
+    private String taskId;
     private double startX, startY, endX, endY;
 
     public DriverTask(String startId, String endId, String date, int driverOrder) {
@@ -16,7 +17,22 @@ public class DriverTask {
         this.driverOrder = driverOrder;
     }
 
+    public DriverTask(String taskId, String startId, String endId, String startPointName, String endPointName, String date, int driverOrder, double startX, double startY, double endX, double endY) {
+        this.taskId = taskId;
+        this.startId = startId;
+        this.endId = endId;
+        this.startPointName = startPointName;
+        this.endPointName = endPointName;
+        this.date = date;
+        this.driverOrder = driverOrder;
+        this.startX = startX;
+        this.startY = startY;
+        this.endX = endX;
+        this.endY = endY;
+    }
+
     // Getters
+    public String getTaskId() { return taskId; }
     public String getStartPointName() { return startPointName; }
     public String getEndPointName() { return endPointName; }
     public String getDate() { return date; }
