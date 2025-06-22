@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.CountDownLatch;
 
 public class Driver_taskListActivity extends AppCompatActivity {
 
@@ -93,13 +93,11 @@ public class Driver_taskListActivity extends AppCompatActivity {
 
     private void fetchTodayTasks() {
         swipeRefreshLayout.setRefreshing(true);
-        String url = serverURL + "/driver/work";
-        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        String url = serverURL + "/driver/all_work";
         int uid = User.getUserId();
 
         JSONObject requestBody = new JSONObject();
-        requestBody.put("uid", uid);
-        requestBody.put("date", date);
+        requestBody.put("uid", String.valueOf(uid));
         String jsonBody = requestBody.toString();
 
         new Thread(() -> {
@@ -117,18 +115,46 @@ public class Driver_taskListActivity extends AppCompatActivity {
                 }
 
                 List<DriverTask> newTaskList = new ArrayList<>();
-                Map<String, PointDetailsCallback> pendingDetails = new HashMap<>();
+                JSONArray tasksArray = responseJson.getJSONArray("tasks");
+                String todayDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
-                // Parse transporting tasks
-                parseTasksFromGeoJson(responseJson.getJSONObject("transporting_geojson"), newTaskList, pendingDetails, date);
-                // Parse transferring tasks
-                parseTasksFromGeoJson(responseJson.getJSONObject("transferring_geojson"), newTaskList, pendingDetails, date);
+                if (tasksArray != null) {
+                    for (int i = 0; i < tasksArray.size(); i++) {
+                        JSONObject taskJson = tasksArray.getJSONObject(i);
+                        if (taskJson == null) continue;
 
-                if (pendingDetails.isEmpty()) {
-                    updateTaskList(newTaskList);
-                } else {
-                    fetchAllPointDetails(pendingDetails, newTaskList);
+                        String taskDate = taskJson.getString("date");
+                        if (!todayDate.equals(taskDate)) {
+                            continue;
+                        }
+
+                        DriverTask task = new DriverTask(
+                                taskJson.getString("start_id"),
+                                taskJson.getString("end_id"),
+                                taskDate,
+                                taskJson.getIntValue("driver_order")
+                        );
+                        newTaskList.add(task);
+                    }
                 }
+
+                if (newTaskList.isEmpty()) {
+                    updateTaskList(newTaskList);
+                    return;
+                }
+
+                final CountDownLatch latch = new CountDownLatch(newTaskList.size());
+                for (DriverTask task : newTaskList) {
+                    new Thread(() -> {
+                        try {
+                            fetchPointDetails(task);
+                        } finally {
+                            latch.countDown();
+                        }
+                    }).start();
+                }
+                latch.await(); // Wait for all detail fetches to complete
+                updateTaskList(newTaskList);
 
             } catch (Exception e) {
                 Log.e("Driver_taskList", "Failed to fetch tasks", e);
@@ -138,47 +164,15 @@ public class Driver_taskListActivity extends AppCompatActivity {
     }
 
     private void parseTasksFromGeoJson(JSONObject geojson, List<DriverTask> newTaskList, Map<String, PointDetailsCallback> pendingDetails, String date) {
-        if (geojson == null) return;
-        JSONArray features = geojson.getJSONArray("features");
-        if (features == null) return;
-
-        for (int i = 0; i < features.size(); i++) {
-            JSONObject feature = features.getJSONObject(i);
-            JSONObject properties = feature.getJSONObject("properties");
-            if (properties == null) {
-                Log.w("Driver_taskList", "Feature with null properties: " + feature.toJSONString());
-                continue;
-            }
-
-            String startId = properties.getString("start_id");
-            String endId = properties.getString("end_id");
-            int order = properties.getIntValue("driver_order");
-
-            DriverTask task = new DriverTask(startId, endId, date, order);
-            newTaskList.add(task);
-
-            if (startId != null && !pointDetailsCache.containsKey(startId)) {
-                pendingDetails.put(startId, details -> task.setStartPointName(details.name));
-            } else if (startId != null) {
-                task.setStartPointName(pointDetailsCache.get(startId).name);
-            }
-
-            if (endId != null && !pointDetailsCache.containsKey(endId)) {
-                pendingDetails.put(endId, details -> task.setEndPointName(details.name));
-            } else if (endId != null) {
-                task.setEndPointName(pointDetailsCache.get(endId).name);
-            }
-        }
+        // This method is no longer used as the API response format has changed.
+        // Kept for reference or future use if the API changes back.
     }
 
     private void handleFetchError(String message) {
         runOnUiThread(() -> {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
             swipeRefreshLayout.setRefreshing(false);
-            // Optionally clear list if error means no data
-            if (!"网络请求失败或无数据".equals(message)) {
-                 updateTaskList(new ArrayList<>());
-            }
+            updateTaskList(new ArrayList<>());
         });
     }
 
@@ -198,40 +192,37 @@ public class Driver_taskListActivity extends AppCompatActivity {
         });
     }
 
-    private void fetchAllPointDetails(Map<String, PointDetailsCallback> pendingDetails, List<DriverTask> newTaskList) {
-        AtomicInteger counter = new AtomicInteger(pendingDetails.size());
-        if (counter.get() == 0) {
-            updateTaskList(newTaskList);
-            return;
+    private void fetchPointDetails(DriverTask task) {
+        if (task.getStartId() != null) {
+            PointDetails startDetails = fetchSinglePoint(task.getStartId());
+            if (startDetails != null) {
+                task.setStartPointName(startDetails.name);
+            }
         }
-        for (Map.Entry<String, PointDetailsCallback> entry : pendingDetails.entrySet()) {
-            String pid = entry.getKey();
-            PointDetailsCallback callback = entry.getValue();
+        if (task.getEndId() != null) {
+            PointDetails endDetails = fetchSinglePoint(task.getEndId());
+            if (endDetails != null) {
+                task.setEndPointName(endDetails.name);
+            }
+        }
+    }
 
-            new Thread(() -> {
-                try {
-                    String url = serverURL + "/point";
-                    JSONObject requestBody = new JSONObject();
-                    requestBody.put("pid", pid);
-                    String response = NetworkHandler.post(url, requestBody.toString());
-                    if (response != null && !response.isEmpty() && !response.startsWith("IOException")) {
-                        JSONObject json = JSONObject.parseObject(response);
-                        if (json != null && json.containsKey("name")) {
-                            PointDetails details = new PointDetails(json.getString("name"));
-                            pointDetailsCache.put(pid, details);
-                            callback.onDetailsFetched(details);
-                        }
-                    }
-                } catch (Exception e) {
-                    Log.e("Driver_taskList", "Failed to fetch point details for pid: " + pid, e);
-                } finally {
-                    if (counter.decrementAndGet() == 0) {
-                        // All details fetched (or failed), now update the entire list
-                        runOnUiThread(() -> updateTaskList(newTaskList));
-                    }
+    private PointDetails fetchSinglePoint(String pid) {
+        try {
+            String url = serverURL + "/point";
+            JSONObject requestBody = new JSONObject();
+            requestBody.put("pid", pid);
+            String response = NetworkHandler.post(url, requestBody.toString());
+            if (response != null && !response.isEmpty() && !response.startsWith("IOException")) {
+                JSONObject json = JSONObject.parseObject(response);
+                if (json != null && json.containsKey("name")) {
+                    return new PointDetails(json.getString("name"));
                 }
-            }).start();
+            }
+        } catch (Exception e) {
+            Log.e("Driver_taskList", "Failed to fetch point details for pid: " + pid, e);
         }
+        return null;
     }
 
     // Helper interface and class for fetching point details

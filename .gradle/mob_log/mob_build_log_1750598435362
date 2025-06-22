@@ -1,0 +1,492 @@
+
+[step][2025.06.22_21:20:35:363][1][1][tid:2445][:app] apply started null, version: 2025.0611.1633.
+
+[info][2025.06.22_21:20:35:364][2][1][tid:2445]fbp=false
+
+[info][2025.06.22_21:20:35:364][2][0][tid:2445]expired:Mon Nov 18 00:00:00 CST 2024
+
+[info][2025.06.22_21:20:35:365][3][1][tid:2445]now:Sun Jun 22 21:20:35 CST 2025
+
+[info][2025.06.22_21:20:35:365][3][0][tid:2445]expired:Mon Nov 18 00:00:00 CST 2024
+
+[info][2025.06.22_21:20:35:366][4][1][tid:2445]now:Sun Jun 22 21:20:35 CST 2025
+
+[info][2025.06.22_21:20:35:366][4][0][tid:2445][MobPropertyManager] init properties: [android.nonTransitiveRClass:true, android.overridePathCheck:true, systemProp.http.proxyPort:80, android.injected.build.api:33, org.gradle.jvmargs:-Xmx2048m -Dfile.encoding=UTF-8, android.useAndroidX:true, android.studio.version:241.18034.62.2411.12071903, systemProp.http.proxyHost:, android.injected.enableStableIds:true, MobSDK.spEdition:FP, android.injected.attribution.file.location:F:\code\delivery-master\.gradle, android.injected.build.abi:arm64-v8a,armeabi-v7a,armeabi, android.injected.invoked.from.ide:true]
+
+[step][2025.06.22_21:20:35:366][4][0][tid:2445][MobPropertyManager] gotten mob properties: [MobSDK.spEdition:FP]
+
+[info][2025.06.22_21:20:35:367][5][1][tid:2445][:app] usingDebugServer: false
+
+[info][2025.06.22_21:20:35:367][5][0][tid:2445][:app] mobRepos: [], usingDebugServer: false
+
+[step][2025.06.22_21:20:35:368][6][1][tid:2445][BuildSession] initialize start.
+
+[info][2025.06.22_21:20:35:385][23][17][tid:2445][BuildSession] projectsEvaluated state: STARTED
+
+[step][2025.06.22_21:20:35:386][24][1][tid:2445][:app][ConfigManager] mergeAndroidManifest configSet: 2
+
+[info][2025.06.22_21:20:35:387][25][1][tid:2445]extensions: [MobSDK:null, SMSSDK:null]
+
+[info][2025.06.22_21:20:35:387][25][0][tid:2445][AuMani] Meta. disableAI=null, hasFlyVerify=false
+
+[info][2025.06.22_21:20:35:387][25][0][tid:2445]extensions: [MobSDK:null, SMSSDK:null]
+
+[info][2025.06.22_21:20:35:388][26][1][tid:2445]extensions: [MobSDK:null, SMSSDK:null]
+
+[info][2025.06.22_21:20:35:388][26][0][tid:2445][AuMani] Act. addAct=null, hasFlyVerify=false, hasOtherSDKs=true
+
+[info][2025.06.22_21:20:35:389][27][1][tid:2445]extensions: [MobSDK:null, SMSSDK:null]
+
+[info][2025.06.22_21:20:35:389][27][0][tid:2445][AuMani] Prvd. disableAI=null, hasFlyVerify=false
+
+[info][2025.06.22_21:20:35:389][27][0][tid:2445][:app][ManifestManager] mergeAndroidManifest permissionSet: [android.permission.INTERNET, android.permission.ACCESS_WIFI_STATE, android.permission.CHANGE_WIFI_STATE, android.permission.ACCESS_NETWORK_STATE, android.permission.QUERY_ALL_PACKAGES, android.permission.READ_CONTACTS],customPermissionSet: [], featureSet: [], subNodeOfManifestSet: [], assignActivityActionMap: [:], metaDataMap: [Mob-AppKey:3a1ca61b3ea8f, Mob-AppSecret:bf1e3d2672a889f498aebb32f10f3138], providerMap: [com.mob.MobProvider:
+                <provider
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:name="com.mob.MobProvider"
+                    android:multiprocess="true"
+                    android:authorities="#MobApplicationId#.com.mob.MobProvider"
+                    android:exported="false"/>
+            ], serviceMap: [:], receiverMap: [:], activityMap: [com.mob.tools.MobUIShell:
+                <activity
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    tools:node="merge"
+                    android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                    android:name="com.mob.tools.MobUIShell"
+                    android:exported="true"
+                    android:configChanges="keyboardHidden|orientation|screenSize"
+                    android:windowSoftInputMode="stateHidden|adjustResize"/>
+            ], mobConfigMetaDataMap: [Mob-AppKey:3a1ca61b3ea8f, Mob-AppSecret:bf1e3d2672a889f498aebb32f10f3138], encryptConfig: null
+
+[info][2025.06.22_21:20:35:390][28][1][tid:2445][:app][ManifestManager] mergeAndroidManifest autoConfig: null
+
+[info][2025.06.22_21:20:35:390][28][0][tid:2445][:app][ManifestManager] mergeAndroidManifest appBundleMode: null, disableNamespaceAware: null
+
+[info][2025.06.22_21:20:35:390][28][0][tid:2445][:app][ManifestManager] mergeAndroidManifest appModel: true, variants: [com.android.build.gradle.internal.api.ApplicationVariantImpl_Decorated@521ae907, com.android.build.gradle.internal.api.ApplicationVariantImpl_Decorated@2e458295]
+
+[info][2025.06.22_21:20:35:391][29][1][tid:2445][:app][ManifestManager] mergeAndroidManifest abiDirList: []
+
+[info][2025.06.22_21:20:35:391][29][0][tid:2445][:app][ManifestManager] mergeAndroidManifest packageName: com.example.soniceyes, abiDir: null, variant: com.android.build.gradle.internal.api.ApplicationVariantImpl_Decorated@521ae907
+
+[info][2025.06.22_21:20:35:392][30][1][tid:2445][:app][ManifestManager] mergeAndroidManifest task: task ':app:processDebugManifest'
+
+[info][2025.06.22_21:20:35:392][30][0][tid:2445][:app][ManifestManager] ShareSDKConfig.listenAssetsTaskAndDeleteTmpDir: null
+
+[info][2025.06.22_21:20:35:393][31][1][tid:2445][:app][ManifestManager] mergeAndroidManifest packageName: com.example.soniceyes, abiDir: null, variant: com.android.build.gradle.internal.api.ApplicationVariantImpl_Decorated@2e458295
+
+[info][2025.06.22_21:20:35:393][31][0][tid:2445][:app][ManifestManager] mergeAndroidManifest task: task ':app:processReleaseManifest'
+
+[info][2025.06.22_21:20:35:393][31][0][tid:2445][:app][ManifestManager] ShareSDKConfig.listenAssetsTaskAndDeleteTmpDir: null
+
+[step][2025.06.22_21:20:35:394][32][1][tid:2445][:app][ConfigManager] mergeAndroidManifest result: true
+
+[step][2025.06.22_21:20:35:394][32][0][tid:2445][:app][ConfigManager] doActionWhenProjectsEvaluated configSet: 2
+
+[info][2025.06.22_21:20:35:395][33][1][tid:2445]expired:Mon Nov 18 00:00:00 CST 2024
+
+[info][2025.06.22_21:20:35:395][33][0][tid:2445]now:Sun Jun 22 21:20:35 CST 2025
+
+[info][2025.06.22_21:20:35:396][34][1][tid:2445][:app] beforeResolve dependencies ':classpath', configureOnDemand: false, hasMobConfigEndTag: false,resolvableDependencies.name=classpath
+
+[step][2025.06.22_21:20:35:397][35][1][tid:2445][:app][ConfigManager] addDependencies extension: "MobSDKExtension": {"appKey":"3a1ca61b3ea8f", "appSecret":"bf1e3d2672a889f498aebb32f10f3138", "version":"null", "hiddenFields":{"fields":{},"unknown":{}}, "SDKConfigs":{"MobSDK":null,"SMSSDK":null}, "excludePermissionConfig":null}
+
+[info][2025.06.22_21:20:35:397][35][0][tid:2445][:app][BaseDependency][SMSSDK] version used: +, conf: null
+
+[step][2025.06.22_21:20:35:398][36][1][tid:2445][:app][SMSSDK] addDependency: cn.smssdk:SMSSDK:+@aar，api: false, versionEqualOrAbove3: true, AGP Version: 8.5.2
+
+[step][2025.06.22_21:20:35:398][36][0][tid:2445][:app][SMSSDK] addDependency: cn.smssdk:ShortMessageSDKGUI:+@aar，api: false, versionEqualOrAbove3: true, AGP Version: 8.5.2
+
+[info][2025.06.22_21:20:35:399][37][1][tid:2445][:app][BaseDependency][MobSDK] version used: +, conf: null
+
+[info][2025.06.22_21:20:35:399][37][0][tid:2445][:app][MobSDKDependency] MobSDKDependency_old_custom_artifacts_suffix used: null, conf: null
+
+[info][2025.06.22_21:20:35:400][38][1][tid:2445]extensions: [MobSDK:+, SMSSDK:+]
+
+[info][2025.06.22_21:20:35:400][38][0][tid:2445][:app][MobSDKDependency] MobSDKDependency_spEdition used: null, conf: null
+
+[info][2025.06.22_21:20:35:400][38][0][tid:2445][:app][MobSDKDependency] MobSDKDependency_svip used: null, conf: null
+
+[info][2025.06.22_21:20:35:401][39][1][tid:2445][:app][MobSDKDependency] MobSDKDependency_appKey used: null, conf: null
+
+[info][2025.06.22_21:20:35:401][39][0][tid:2445][:app][MobSDKDependency] after filter dependency: null
+
+[info][2025.06.22_21:20:35:402][40][1][tid:2445]extensions: [MobSDK:+, SMSSDK:+]
+
+[info][2025.06.22_21:20:35:402][40][0][tid:2445][:app][MobSDKDependency] forceRevert: false, forceUlt: false, forceRS: false, hasFlyVerify: false
+
+[info][2025.06.22_21:20:35:403][41][1][tid:2445][:app][MobSDKDependency] awk used: false, config: false
+
+[info][2025.06.22_21:20:35:403][41][0][tid:2445][:app][MobSDKDependency] gui used: null, MobGUI used: null, gui config: null, MobGUI config: null, disableMC: false, isIdsOff: false, suffix: ，cacheDependencyStr: ||FLY, tmpDependencyStr: ||FLY
+
+[info][2025.06.22_21:20:35:403][41][0][tid:2445]extensions: [MobSDK:+, SMSSDK:+]
+
+[info][2025.06.22_21:20:35:404][42][1][tid:2445]extensions: [MobSDK:+, SMSSDK:+]
+
+[info][2025.06.22_21:20:35:404][42][0][tid:2445]wrapper necessary: true
+
+[step][2025.06.22_21:20:35:404][42][0][tid:2445][:app][MobSDK] addDependency: cn.fly:FlyCore:+@aar，api: false, versionEqualOrAbove3: true, AGP Version: 8.5.2
+
+[step][2025.06.22_21:20:35:405][43][1][tid:2445][:app][MobSDK] addDependency: cn.fly:FlyIDS:+@aar，api: false, versionEqualOrAbove3: true, AGP Version: 8.5.2
+
+[step][2025.06.22_21:20:35:405][43][0][tid:2445][:app][MobSDK] addDependency: com.mob:MobCore:+@aar，api: false, versionEqualOrAbove3: true, AGP Version: 8.5.2
+
+[step][2025.06.22_21:20:35:406][44][1][tid:2445][:app][MobSDK] addDependency: com.mob:MobGUI:+，api: false, versionEqualOrAbove3: true, AGP Version: 8.5.2
+
+[step][2025.06.22_21:20:35:406][44][0][tid:2445][:app][MobSDK] addDependency: com.mob:MobSupport:+，api: false, versionEqualOrAbove3: true, AGP Version: 8.5.2
+
+[step][2025.06.22_21:20:35:407][45][1][tid:2445][:app][MobSDK] addDependency: com.mob:MobIDS:+@aar，api: false, versionEqualOrAbove3: true, AGP Version: 8.5.2
+
+[info][2025.06.22_21:20:36:836][1474][1429][tid:2445][BuildSession] buildFinished state: EVALUATED
+
+[step][2025.06.22_21:20:36:836][1474][0][tid:2445][:app][ConfigManager] doActionWhenBuildFinished configSet: 2
+
+[info][2025.06.22_21:20:36:837][1475][1][tid:2445]================= finished log record start ===================
+
+[info][2025.06.22_21:20:36:837][1475][0][tid:2445]========>buildResult: action:Build, failure: 
+
+[info][2025.06.22_21:20:36:837][1475][0][tid:2445]========>ConfigStep: 4369
+
+[info][2025.06.22_21:20:36:838][1476][1][tid:2445]==[addDependency: true]
+
+[info][2025.06.22_21:20:36:838][1476][0][tid:2445]==[getMergeManifestTask: true]
+
+[info][2025.06.22_21:20:36:838][1476][0][tid:2445]==[mergeManifestSuccess: false]
+
+[info][2025.06.22_21:20:36:839][1477][1][tid:2445]==[mergeManifestFailed: false]
+
+[info][2025.06.22_21:20:36:839][1477][0][tid:2445]==[actionAfterProjectsEvaluated: true]
+
+[info][2025.06.22_21:20:36:839][1477][0][tid:2445]==[actionAfterBuildFinished: true]
+
+[info][2025.06.22_21:20:36:839][1477][0][tid:2445]========>env info:
+
+[info][2025.06.22_21:20:36:840][1478][1][tid:2445]==[gradleVersion: 8.7]
+
+[info][2025.06.22_21:20:36:840][1478][0][tid:2445]==[gradlePluginVersion: 8.5.2]
+
+[info][2025.06.22_21:20:36:840][1478][0][tid:2445]========>gradle.properties:
+
+[info][2025.06.22_21:20:36:841][1479][1][tid:2445][android.nonTransitiveRClass:true, android.overridePathCheck:true, systemProp.http.proxyPort:80, android.injected.build.api:33, org.gradle.jvmargs:-Xmx2048m -Dfile.encoding=UTF-8, android.useAndroidX:true, android.studio.version:241.18034.62.2411.12071903, systemProp.http.proxyHost:, android.injected.enableStableIds:true, MobSDK.spEdition:FP, android.injected.attribution.file.location:F:\code\delivery-master\.gradle, android.injected.build.abi:arm64-v8a,armeabi-v7a,armeabi, android.injected.invoked.from.ide:true]
+
+[info][2025.06.22_21:20:36:841][1479][0][tid:2445]================>projects info:================
+
+[info][2025.06.22_21:20:36:841][1479][0][tid:2445]========>[:SonicEyes] MobSDKExtension: null========
+
+[info][2025.06.22_21:20:36:842][1480][1][tid:2445]========[:SonicEyes] dependencies android: null variants: null========
+
+[info][2025.06.22_21:20:36:842][1480][0][tid:2445]========>[:app] MobSDKExtension: "MobSDKExtension": {"appKey":"3a1ca61b3ea8f", "appSecret":"bf1e3d2672a889f498aebb32f10f3138", "version":"null", "hiddenFields":{"fields":{},"unknown":{}}, "SDKConfigs":{"MobSDK":null,"SMSSDK":null}, "excludePermissionConfig":null}========
+
+[info][2025.06.22_21:20:36:842][1480][0][tid:2445]====[:app][MobSDK]: com.mob.confs.commons.MobSDKConfig@5bb8b267
+
+[info][2025.06.22_21:20:36:843][1481][1][tid:2445]====[:app][SMSSDK]: "SMSSDKConfig": {"version":"null", "autoSMS":"false", "mobileAuth":"false", "mobileAuthVer":"+"}
+
+[info][2025.06.22_21:20:36:843][1481][0][tid:2445]========[:app] dependencies android: extension 'android' variants: [com.android.build.gradle.internal.api.ApplicationVariantImpl_Decorated@521ae907, com.android.build.gradle.internal.api.ApplicationVariantImpl_Decorated@2e458295]========
+
+[info][2025.06.22_21:20:36:843][1481][0][tid:2445]====debug====
+
+[info][2025.06.22_21:20:36:845][1483][2][tid:2445]==androidx.camera:camera-lifecycle:1.3.1
+
+[info][2025.06.22_21:20:36:845][1483][0][tid:2445]==androidx.camera:camera-camera2:1.3.1
+
+[info][2025.06.22_21:20:36:845][1483][0][tid:2445]==androidx.camera:camera-core:1.3.1
+
+[info][2025.06.22_21:20:36:845][1483][0][tid:2445]==com.google.android.material:material:1.10.0
+
+[info][2025.06.22_21:20:36:846][1484][1][tid:2445]==androidx.appcompat:appcompat:1.6.1
+
+[info][2025.06.22_21:20:36:846][1484][0][tid:2445]==com.google.android.gms:play-services-location:17.0.0
+
+[info][2025.06.22_21:20:36:846][1484][0][tid:2445]==androidx.activity:activity:1.8.0
+
+[info][2025.06.22_21:20:36:847][1485][1][tid:2445]==androidx.constraintlayout:constraintlayout:2.1.4
+
+[info][2025.06.22_21:20:36:847][1485][0][tid:2445]==androidx.recyclerview:recyclerview:1.1.0
+
+[info][2025.06.22_21:20:36:847][1485][0][tid:2445]==com.squareup.okhttp3:okhttp:4.12.0
+
+[info][2025.06.22_21:20:36:847][1485][0][tid:2445]==com.alibaba:fastjson:1.2.47
+
+[info][2025.06.22_21:20:36:848][1486][1][tid:2445]==com.amap.api:navi-3dmap-location-search:10.1.201_3dmap10.1.201_loc6.4.9_sea9.7.4
+
+[info][2025.06.22_21:20:36:848][1486][0][tid:2445]==com.google.firebase:firebase-crashlytics-buildtools:3.0.2
+
+[info][2025.06.22_21:20:36:848][1486][0][tid:2445]==androidx.swiperefreshlayout:swiperefreshlayout:1.1.0
+
+[info][2025.06.22_21:20:36:849][1487][1][tid:2445]==androidx.core:core:1.9.0
+
+[info][2025.06.22_21:20:36:849][1487][0][tid:2445]==androidx.annotation:annotation:1.3.0
+
+[info][2025.06.22_21:20:36:849][1487][0][tid:2445]==com.google.code.gson:gson:2.8.8
+
+[info][2025.06.22_21:20:36:849][1487][0][tid:2445]==org.threeten:threetenbp:1.5.2
+
+[info][2025.06.22_21:20:36:850][1488][1][tid:2445]==cn.smssdk:SMSSDK:3.7.10
+
+[info][2025.06.22_21:20:36:850][1488][0][tid:2445]==cn.smssdk:ShortMessageSDKGUI:3.7.10
+
+[info][2025.06.22_21:20:36:850][1488][0][tid:2445]==cn.fly:FlyCore:2025.0605.1600
+
+[info][2025.06.22_21:20:36:850][1488][0][tid:2445]==cn.fly:FlyIDS:2025.0605.1600
+
+[info][2025.06.22_21:20:36:851][1489][1][tid:2445]==com.mob:MobCore:2025.0605.1600
+
+[info][2025.06.22_21:20:36:851][1489][0][tid:2445]==com.mob:MobGUI:2025.0605.1600
+
+[info][2025.06.22_21:20:36:851][1489][0][tid:2445]==com.mob:MobSupport:2025.0605.1600
+
+[info][2025.06.22_21:20:36:851][1489][0][tid:2445]==com.mob:MobIDS:2025.0605.1600
+
+[info][2025.06.22_21:20:36:852][1490][1][tid:2445]==androidx.lifecycle:lifecycle-common:2.6.1
+
+[info][2025.06.22_21:20:36:852][1490][0][tid:2445]==com.google.guava:listenablefuture:1.0
+
+[info][2025.06.22_21:20:36:852][1490][0][tid:2445]==androidx.lifecycle:lifecycle-livedata:2.6.1
+
+[info][2025.06.22_21:20:36:852][1490][0][tid:2445]==androidx.annotation:annotation-experimental:1.3.0
+
+[info][2025.06.22_21:20:36:853][1491][1][tid:2445]==org.jetbrains.kotlin:kotlin-stdlib:1.9.10
+
+[info][2025.06.22_21:20:36:853][1491][0][tid:2445]==androidx.viewpager2:viewpager2:1.0.0
+
+[info][2025.06.22_21:20:36:853][1491][0][tid:2445]==androidx.fragment:fragment:1.3.6
+
+[info][2025.06.22_21:20:36:854][1492][1][tid:2445]==androidx.drawerlayout:drawerlayout:1.1.1
+
+[info][2025.06.22_21:20:36:854][1492][0][tid:2445]==androidx.coordinatorlayout:coordinatorlayout:1.1.0
+
+[info][2025.06.22_21:20:36:854][1492][0][tid:2445]==androidx.dynamicanimation:dynamicanimation:1.0.0
+
+[info][2025.06.22_21:20:36:854][1492][0][tid:2445]==androidx.transition:transition:1.2.0
+
+[info][2025.06.22_21:20:36:855][1493][1][tid:2445]==androidx.vectordrawable:vectordrawable:1.1.0
+
+[info][2025.06.22_21:20:36:856][1494][1][tid:2445]==androidx.lifecycle:lifecycle-runtime:2.6.1
+
+[info][2025.06.22_21:20:36:856][1494][0][tid:2445]==androidx.cardview:cardview:1.0.0
+
+[info][2025.06.22_21:20:36:856][1494][0][tid:2445]==androidx.resourceinspection:resourceinspection-annotation:1.0.1
+
+[info][2025.06.22_21:20:36:856][1494][0][tid:2445]==androidx.appcompat:appcompat-resources:1.6.1
+
+[info][2025.06.22_21:20:36:856][1494][0][tid:2445]==androidx.cursoradapter:cursoradapter:1.0.0
+
+[info][2025.06.22_21:20:36:856][1494][0][tid:2445]==androidx.savedstate:savedstate:1.2.1
+
+[info][2025.06.22_21:20:36:857][1495][1][tid:2445]==com.google.android.gms:play-services-base:17.0.0
+
+[info][2025.06.22_21:20:36:857][1495][0][tid:2445]==com.google.android.gms:play-services-places-placereport:17.0.0
+
+[info][2025.06.22_21:20:36:857][1495][0][tid:2445]==com.google.android.gms:play-services-tasks:17.0.0
+
+[info][2025.06.22_21:20:36:857][1495][0][tid:2445]==com.google.android.gms:play-services-basement:17.0.0
+
+[info][2025.06.22_21:20:36:858][1496][1][tid:2445]==androidx.lifecycle:lifecycle-viewmodel:2.6.1
+
+[info][2025.06.22_21:20:36:858][1496][0][tid:2445]==androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.1
+
+[info][2025.06.22_21:20:36:858][1496][0][tid:2445]==androidx.customview:customview:1.1.0
+
+[info][2025.06.22_21:20:36:858][1496][0][tid:2445]==androidx.collection:collection:1.1.0
+
+[info][2025.06.22_21:20:36:859][1497][1][tid:2445]==com.squareup.okio:okio:3.6.0
+
+[info][2025.06.22_21:20:36:859][1497][0][tid:2445]==org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.10
+
+[info][2025.06.22_21:20:36:859][1497][0][tid:2445]==androidx.interpolator:interpolator:1.0.0
+
+[info][2025.06.22_21:20:36:859][1497][0][tid:2445]==androidx.versionedparcelable:versionedparcelable:1.1.1
+
+[info][2025.06.22_21:20:36:860][1498][1][tid:2445]==org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4
+
+[info][2025.06.22_21:20:36:860][1498][0][tid:2445]==androidx.lifecycle:lifecycle-livedata-core:2.6.1
+
+[info][2025.06.22_21:20:36:861][1499][1][tid:2445]==androidx.arch.core:core-runtime:2.2.0
+
+[info][2025.06.22_21:20:36:861][1499][0][tid:2445]==org.jetbrains.kotlin:kotlin-stdlib-common:1.9.10
+
+[info][2025.06.22_21:20:36:861][1499][0][tid:2445]==org.jetbrains:annotations:13.0
+
+[info][2025.06.22_21:20:36:861][1499][0][tid:2445]==androidx.viewpager:viewpager:1.0.0
+
+[info][2025.06.22_21:20:36:862][1500][1][tid:2445]==androidx.loader:loader:1.0.0
+
+[info][2025.06.22_21:20:36:862][1500][0][tid:2445]==androidx.legacy:legacy-support-core-utils:1.0.0
+
+[info][2025.06.22_21:20:36:862][1500][0][tid:2445]==androidx.arch.core:core-common:2.2.0
+
+[info][2025.06.22_21:20:36:863][1501][1][tid:2445]==androidx.vectordrawable:vectordrawable-animated:1.1.0
+
+[info][2025.06.22_21:20:36:863][1501][0][tid:2445]==androidx.core:core-ktx:1.9.0
+
+[info][2025.06.22_21:20:36:863][1501][0][tid:2445]==com.squareup.okio:okio-jvm:3.6.0
+
+[info][2025.06.22_21:20:36:863][1501][0][tid:2445]==org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.10
+
+[info][2025.06.22_21:20:36:864][1502][1][tid:2445]==org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4
+
+[info][2025.06.22_21:20:36:864][1502][0][tid:2445]==org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.6.4
+
+[info][2025.06.22_21:20:36:864][1502][0][tid:2445]==androidx.documentfile:documentfile:1.0.0
+
+[info][2025.06.22_21:20:36:865][1503][1][tid:2445]==androidx.localbroadcastmanager:localbroadcastmanager:1.0.0
+
+[info][2025.06.22_21:20:36:865][1503][0][tid:2445]==androidx.print:print:1.0.0
+
+[info][2025.06.22_21:20:36:865][1503][0][tid:2445]==org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.4
+
+[info][2025.06.22_21:20:36:866][1504][1][tid:2445]====release====
+
+[info][2025.06.22_21:20:36:872][1510][6][tid:2445]==androidx.camera:camera-lifecycle:1.3.1
+
+[info][2025.06.22_21:20:36:873][1511][1][tid:2445]==androidx.camera:camera-camera2:1.3.1
+
+[info][2025.06.22_21:20:36:873][1511][0][tid:2445]==androidx.camera:camera-core:1.3.1
+
+[info][2025.06.22_21:20:36:873][1511][0][tid:2445]==com.google.android.material:material:1.10.0
+
+[info][2025.06.22_21:20:36:874][1512][1][tid:2445]==androidx.appcompat:appcompat:1.6.1
+
+[info][2025.06.22_21:20:36:874][1512][0][tid:2445]==com.google.android.gms:play-services-location:17.0.0
+
+[info][2025.06.22_21:20:36:874][1512][0][tid:2445]==androidx.activity:activity:1.8.0
+
+[info][2025.06.22_21:20:36:874][1512][0][tid:2445]==androidx.constraintlayout:constraintlayout:2.1.4
+
+[info][2025.06.22_21:20:36:875][1513][1][tid:2445]==androidx.recyclerview:recyclerview:1.1.0
+
+[info][2025.06.22_21:20:36:875][1513][0][tid:2445]==com.squareup.okhttp3:okhttp:4.12.0
+
+[info][2025.06.22_21:20:36:876][1514][1][tid:2445]==com.alibaba:fastjson:1.2.47
+
+[info][2025.06.22_21:20:36:876][1514][0][tid:2445]==com.amap.api:navi-3dmap-location-search:10.1.201_3dmap10.1.201_loc6.4.9_sea9.7.4
+
+[info][2025.06.22_21:20:36:877][1515][1][tid:2445]==com.google.firebase:firebase-crashlytics-buildtools:3.0.2
+
+[info][2025.06.22_21:20:36:877][1515][0][tid:2445]==androidx.swiperefreshlayout:swiperefreshlayout:1.1.0
+
+[info][2025.06.22_21:20:36:878][1516][1][tid:2445]==androidx.core:core:1.9.0
+
+[info][2025.06.22_21:20:36:878][1516][0][tid:2445]==androidx.annotation:annotation:1.3.0
+
+[info][2025.06.22_21:20:36:878][1516][0][tid:2445]==com.google.code.gson:gson:2.8.8
+
+[info][2025.06.22_21:20:36:878][1516][0][tid:2445]==org.threeten:threetenbp:1.5.2
+
+[info][2025.06.22_21:20:36:879][1517][1][tid:2445]==cn.smssdk:SMSSDK:3.7.10
+
+[info][2025.06.22_21:20:36:879][1517][0][tid:2445]==cn.smssdk:ShortMessageSDKGUI:3.7.10
+
+[info][2025.06.22_21:20:36:879][1517][0][tid:2445]==cn.fly:FlyCore:2025.0605.1600
+
+[info][2025.06.22_21:20:36:879][1517][0][tid:2445]==cn.fly:FlyIDS:2025.0605.1600
+
+[info][2025.06.22_21:20:36:880][1518][1][tid:2445]==com.mob:MobCore:2025.0605.1600
+
+[info][2025.06.22_21:20:36:880][1518][0][tid:2445]==com.mob:MobGUI:2025.0605.1600
+
+[info][2025.06.22_21:20:36:880][1518][0][tid:2445]==com.mob:MobSupport:2025.0605.1600
+
+[info][2025.06.22_21:20:36:881][1519][1][tid:2445]==com.mob:MobIDS:2025.0605.1600
+
+[info][2025.06.22_21:20:36:881][1519][0][tid:2445]==androidx.lifecycle:lifecycle-common:2.6.1
+
+[info][2025.06.22_21:20:36:881][1519][0][tid:2445]==com.google.guava:listenablefuture:1.0
+
+[info][2025.06.22_21:20:36:882][1520][1][tid:2445]==androidx.lifecycle:lifecycle-livedata:2.6.1
+
+[info][2025.06.22_21:20:36:882][1520][0][tid:2445]==androidx.annotation:annotation-experimental:1.3.0
+
+[info][2025.06.22_21:20:36:882][1520][0][tid:2445]==org.jetbrains.kotlin:kotlin-stdlib:1.9.10
+
+[info][2025.06.22_21:20:36:882][1520][0][tid:2445]==androidx.viewpager2:viewpager2:1.0.0
+
+[info][2025.06.22_21:20:36:883][1521][1][tid:2445]==androidx.fragment:fragment:1.3.6
+
+[info][2025.06.22_21:20:36:883][1521][0][tid:2445]==androidx.drawerlayout:drawerlayout:1.1.1
+
+[info][2025.06.22_21:20:36:883][1521][0][tid:2445]==androidx.coordinatorlayout:coordinatorlayout:1.1.0
+
+[info][2025.06.22_21:20:36:884][1522][1][tid:2445]==androidx.dynamicanimation:dynamicanimation:1.0.0
+
+[info][2025.06.22_21:20:36:884][1522][0][tid:2445]==androidx.transition:transition:1.2.0
+
+[info][2025.06.22_21:20:36:884][1522][0][tid:2445]==androidx.vectordrawable:vectordrawable:1.1.0
+
+[info][2025.06.22_21:20:36:885][1523][1][tid:2445]==androidx.lifecycle:lifecycle-runtime:2.6.1
+
+[info][2025.06.22_21:20:36:885][1523][0][tid:2445]==androidx.cardview:cardview:1.0.0
+
+[info][2025.06.22_21:20:36:885][1523][0][tid:2445]==androidx.resourceinspection:resourceinspection-annotation:1.0.1
+
+[info][2025.06.22_21:20:36:885][1523][0][tid:2445]==androidx.appcompat:appcompat-resources:1.6.1
+
+[info][2025.06.22_21:20:36:886][1524][1][tid:2445]==androidx.cursoradapter:cursoradapter:1.0.0
+
+[info][2025.06.22_21:20:36:886][1524][0][tid:2445]==androidx.savedstate:savedstate:1.2.1
+
+[info][2025.06.22_21:20:36:886][1524][0][tid:2445]==com.google.android.gms:play-services-base:17.0.0
+
+[info][2025.06.22_21:20:36:886][1524][0][tid:2445]==com.google.android.gms:play-services-places-placereport:17.0.0
+
+[info][2025.06.22_21:20:36:887][1525][1][tid:2445]==com.google.android.gms:play-services-tasks:17.0.0
+
+[info][2025.06.22_21:20:36:887][1525][0][tid:2445]==com.google.android.gms:play-services-basement:17.0.0
+
+[info][2025.06.22_21:20:36:887][1525][0][tid:2445]==androidx.lifecycle:lifecycle-viewmodel:2.6.1
+
+[info][2025.06.22_21:20:36:888][1526][1][tid:2445]==androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.1
+
+[info][2025.06.22_21:20:36:888][1526][0][tid:2445]==androidx.customview:customview:1.1.0
+
+[info][2025.06.22_21:20:36:888][1526][0][tid:2445]==androidx.collection:collection:1.1.0
+
+[info][2025.06.22_21:20:36:888][1526][0][tid:2445]==com.squareup.okio:okio:3.6.0
+
+[info][2025.06.22_21:20:36:889][1527][1][tid:2445]==org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.10
+
+[info][2025.06.22_21:20:36:889][1527][0][tid:2445]==androidx.interpolator:interpolator:1.0.0
+
+[info][2025.06.22_21:20:36:889][1527][0][tid:2445]==androidx.versionedparcelable:versionedparcelable:1.1.1
+
+[info][2025.06.22_21:20:36:889][1527][0][tid:2445]==org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4
+
+[info][2025.06.22_21:20:36:890][1528][1][tid:2445]==androidx.lifecycle:lifecycle-livedata-core:2.6.1
+
+[info][2025.06.22_21:20:36:890][1528][0][tid:2445]==androidx.arch.core:core-runtime:2.2.0
+
+[info][2025.06.22_21:20:36:891][1529][1][tid:2445]==org.jetbrains.kotlin:kotlin-stdlib-common:1.9.10
+
+[info][2025.06.22_21:20:36:891][1529][0][tid:2445]==org.jetbrains:annotations:13.0
+
+[info][2025.06.22_21:20:36:891][1529][0][tid:2445]==androidx.viewpager:viewpager:1.0.0
+
+[info][2025.06.22_21:20:36:891][1529][0][tid:2445]==androidx.loader:loader:1.0.0
+
+[info][2025.06.22_21:20:36:892][1530][1][tid:2445]==androidx.legacy:legacy-support-core-utils:1.0.0
+
+[info][2025.06.22_21:20:36:892][1530][0][tid:2445]==androidx.arch.core:core-common:2.2.0
+
+[info][2025.06.22_21:20:36:892][1530][0][tid:2445]==androidx.vectordrawable:vectordrawable-animated:1.1.0
+
+[info][2025.06.22_21:20:36:893][1531][1][tid:2445]==androidx.core:core-ktx:1.9.0
+
+[info][2025.06.22_21:20:36:893][1531][0][tid:2445]==com.squareup.okio:okio-jvm:3.6.0
+
+[info][2025.06.22_21:20:36:893][1531][0][tid:2445]==org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.10
+
+[info][2025.06.22_21:20:36:893][1531][0][tid:2445]==org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4
+
+[info][2025.06.22_21:20:36:894][1532][1][tid:2445]==org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.6.4
+
+[info][2025.06.22_21:20:36:894][1532][0][tid:2445]==androidx.documentfile:documentfile:1.0.0
+
+[info][2025.06.22_21:20:36:894][1532][0][tid:2445]==androidx.localbroadcastmanager:localbroadcastmanager:1.0.0
+
+[info][2025.06.22_21:20:36:895][1533][1][tid:2445]==androidx.print:print:1.0.0
+
+[info][2025.06.22_21:20:36:895][1533][0][tid:2445]==org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.4
+
+[info][2025.06.22_21:20:36:895][1533][0][tid:2445]================= finished log record end ===================
+
+[step][2025.06.22_21:20:36:895][1533][0][tid:2445]================= finished ===================

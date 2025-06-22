@@ -4,13 +4,17 @@ import static com.example.tools.Constants.serverURL;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -19,6 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
@@ -36,6 +41,7 @@ import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
+import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
 import com.example.soniceyes.R;
 import com.example.tools.NetworkHandler;
@@ -48,6 +54,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -67,6 +74,8 @@ public class Driver_homeActivity extends AppCompatActivity implements AMapLocati
 
     private AlertDialog progressDialog;
     private boolean isFirstLocation = true;
+    private String uid;
+    private Polyline mPolyline;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -142,7 +151,7 @@ public class Driver_homeActivity extends AppCompatActivity implements AMapLocati
             if (lat != 0.0 && lon != 0.0) {
                  aMap.clear();
                  showDriverLocation();
-                 getDailyTasks();
+                 getRoutesAndDraw();
             }
         });
 
@@ -179,6 +188,21 @@ public class Driver_homeActivity extends AppCompatActivity implements AMapLocati
             return false;
         });
 
+        init();
+    }
+
+    private void init() {
+        if (aMap == null) {
+            aMap = mapView.getMap();
+        }
+
+        //设置地图语言
+        aMap.setMapLanguage(AMap.CHINESE);
+
+        // 获取uid
+        SharedPreferences sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
+        uid = sharedPreferences.getString("uid", "3");
+
         startLocation();
     }
 
@@ -210,15 +234,14 @@ public class Driver_homeActivity extends AppCompatActivity implements AMapLocati
                 lat = amapLocation.getLatitude();
                 lon = amapLocation.getLongitude();
                 Log.d("Driver_homeActivity", "定位成功: " + lat + "," + lon);
-                showDriverLocation();
                 if (isFirstLocation) {
+                    showDriverLocation();
                     isFirstLocation = false;
-                    aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lon), 18));
-                    getDailyTasks();
+                    aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lon), 15));
+                    getRoutesAndDraw();
                 }
             } else {
                 Log.e("Driver_homeActivity", "定位失败：" + amapLocation.getErrorInfo());
-                Toast.makeText(this, "定位失败：" + amapLocation.getErrorInfo(), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -226,212 +249,125 @@ public class Driver_homeActivity extends AppCompatActivity implements AMapLocati
     private void showDriverLocation() {
         MyLocationStyle myLocationStyle = new MyLocationStyle();
         myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE_NO_CENTER);
-        myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(R.mipmap.locationpurple));
-        myLocationStyle.strokeColor(Color.TRANSPARENT);
-        myLocationStyle.radiusFillColor(Color.TRANSPARENT);
+        myLocationStyle.interval(2000);
         aMap.setMyLocationStyle(myLocationStyle);
-        aMap.setMyLocationEnabled(true);
         aMap.getUiSettings().setMyLocationButtonEnabled(false);
+        aMap.setMyLocationEnabled(true);
     }
 
-    private void parseAndDrawRoutesAndPoints(String jsonResponse) {
+    private void getRoutesAndDraw() {
+        progressDialog.show();
         aMap.clear();
         showDriverLocation();
-
-        try {
-            JSONObject response = JSONObject.parseObject(jsonResponse);
-            LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
-            Map<String, String> pointIdToTypeMap = new HashMap<>();
-
-            // 1. Draw polylines and collect point IDs
-            extractRouteData(response.getJSONObject("transporting_geojson"), Color.BLUE, false, boundsBuilder, pointIdToTypeMap);
-            extractRouteData(response.getJSONObject("transferring_geojson"), Color.GREEN, true, boundsBuilder, pointIdToTypeMap);
-
-            // 2. Fetch point details and then draw markers
-            Set<String> pointIds = pointIdToTypeMap.keySet();
-            if (!pointIds.isEmpty()) {
-                fetchAndDrawMarkers(pointIds, pointIdToTypeMap, boundsBuilder);
-            } else {
-                Toast.makeText(this, "今日无任务", Toast.LENGTH_SHORT).show();
-            }
-
-        } catch (JSONException e) {
-            Log.e("Driver_homeActivity", "Error parsing or drawing routes", e);
-            Toast.makeText(this, "解析路线数据时出错", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void extractRouteData(JSONObject geojson, int color, boolean isDashed, LatLngBounds.Builder boundsBuilder, Map<String, String> pointIdToTypeMap) {
-        if (geojson == null) return;
-        JSONArray features = geojson.getJSONArray("features");
-        if (features == null) return;
-
-        for (int i = 0; i < features.size(); i++) {
-            JSONObject feature = features.getJSONObject(i);
-            if (feature == null) continue;
-
-            drawPolylineFromFeature(feature, color, isDashed, boundsBuilder);
-
-            JSONObject properties = feature.getJSONObject("properties");
-            if (properties != null) {
-                String startId = properties.getString("start_id");
-                String endId = properties.getString("end_id");
-                if (startId != null) {
-                    pointIdToTypeMap.putIfAbsent(startId, "start");
-                }
-                if (endId != null) {
-                    pointIdToTypeMap.putIfAbsent(endId, "end");
-                }
-            }
-        }
-    }
-
-    private void drawPolylineFromFeature(JSONObject feature, int color, boolean isDashed, LatLngBounds.Builder boundsBuilder) {
-        if (feature == null) return;
-        JSONObject geometry = feature.getJSONObject("geometry");
-        if (geometry == null) return;
-
-        String type = geometry.getString("type");
-        JSONArray coordinates = geometry.getJSONArray("coordinates");
-        if (coordinates == null) return;
-
-        PolylineOptions baseOptions = new PolylineOptions().width(10).color(color).useGradient(true);
-        if (isDashed) {
-            baseOptions.setDottedLine(true);
-        }
-
-        if ("LineString".equals(type)) {
-            PolylineOptions polylineOptions = new PolylineOptions().width(baseOptions.getWidth()).color(baseOptions.getColor()).useGradient(baseOptions.isUseGradient()).setDottedLine(baseOptions.isDottedLine());
-            for (int i = 0; i < coordinates.size(); i++) {
-                JSONArray coord = coordinates.getJSONArray(i);
-                if (coord != null && coord.size() >= 2) {
-                    LatLng point = new LatLng(coord.getDouble(1), coord.getDouble(0));
-                    polylineOptions.add(point);
-                    boundsBuilder.include(point);
-                }
-            }
-            aMap.addPolyline(polylineOptions);
-        } else if ("MultiLineString".equals(type)) {
-            for (int i = 0; i < coordinates.size(); i++) {
-                PolylineOptions polylineOptions = new PolylineOptions().width(baseOptions.getWidth()).color(baseOptions.getColor()).useGradient(baseOptions.isUseGradient()).setDottedLine(baseOptions.isDottedLine());
-                JSONArray lineString = coordinates.getJSONArray(i);
-                if (lineString == null) continue;
-                for (int j = 0; j < lineString.size(); j++) {
-                    JSONArray coord = lineString.getJSONArray(j);
-                    if (coord != null && coord.size() >= 2) {
-                        LatLng point = new LatLng(coord.getDouble(1), coord.getDouble(0));
-                        polylineOptions.add(point);
-                        boundsBuilder.include(point);
-                    }
-                }
-                aMap.addPolyline(polylineOptions);
-            }
-        }
-    }
-
-    private void fetchAndDrawMarkers(Set<String> pointIds, Map<String, String> pointIdToTypeMap, LatLngBounds.Builder boundsBuilder) {
-        taskPoints.clear();
-        AtomicInteger pendingRequests = new AtomicInteger(pointIds.size());
-
-        for (String pid : pointIds) {
-            String url = serverURL + "/point";
-            JSONObject requestBody = new JSONObject();
-            requestBody.put("pid", pid);
-            String jsonBody = requestBody.toString();
-
-            new Thread(() -> {
-                try {
-                    String response = NetworkHandler.post(url, jsonBody);
-                    if (response != null && !response.startsWith("IOException")) {
-                        JSONObject pointJson = JSONObject.parseObject(response);
-                        if (pointJson != null && pointJson.containsKey("name")) {
-                            taskPoints.add(new TaskPoint(
-                                    pid,
-                                    pointJson.getString("name"),
-                                    pointJson.getDoubleValue("x"),
-                                    pointJson.getDoubleValue("y"),
-                                    pointIdToTypeMap.getOrDefault(pid, "middle")
-                            ));
-                        } else {
-                             Log.w("Driver_homeActivity", "Point data for pid: " + pid + " is invalid: " + response);
-                        }
-                    }
-                } catch (Exception e) {
-                    Log.e("Driver_homeActivity", "Failed to get point data for pid: " + pid, e);
-                } finally {
-                    if (pendingRequests.decrementAndGet() == 0) {
-                        runOnUiThread(() -> {
-                            drawTaskPointsOnMap();
-                            if (!taskPoints.isEmpty()) {
-                                aMap.animateCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(), 150));
-                            }
-                        });
-                    }
-                }
-            }).start();
-        }
-    }
-
-    private void drawTaskPointsOnMap() {
-        for (TaskPoint point : taskPoints) {
-            LatLng latLng = new LatLng(point.y, point.x);
-            MarkerOptions markerOptions = new MarkerOptions()
-                    .position(latLng)
-                    .title(point.name);
-
-            if ("start".equals(point.type)) {
-                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_outline));
-            } else if ("end".equals(point.type)) {
-                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_blind_location));
-            }
-            // For "middle" points or if type is not specified, default icon will be used.
-
-            Marker marker = aMap.addMarker(markerOptions);
-            marker.setObject(point);
-        }
-    }
-
-    private void getDailyTasks() {
-        progressDialog.show();
-
-        String url = serverURL + "/driver/work";
-        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-        int uid = User.getUserId();
-
-        JSONObject requestBody = new JSONObject();
-        requestBody.put("uid", uid);
-        requestBody.put("date", date);
-        String jsonBody = requestBody.toString();
+        final LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
 
         new Thread(() -> {
             try {
-                String response = NetworkHandler.post(url, jsonBody);
-                    runOnUiThread(() -> {
-                        progressDialog.dismiss();
-                    if (response != null && !response.startsWith("IOException")) {
-                        try {
-                            JSONObject jsonResponse = JSONObject.parseObject(response);
-                            if (jsonResponse.getIntValue("status_code") == 200) {
-                                parseAndDrawRoutesAndPoints(response);
-                            } else {
-                                Toast.makeText(Driver_homeActivity.this, "获取任务失败: " + jsonResponse.getString("message"), Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            Log.e("Driver_homeActivity", "Failed to parse daily tasks", e);
-                            Toast.makeText(Driver_homeActivity.this, "解析任务数据时出错", Toast.LENGTH_SHORT).show();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                String currentDate = sdf.format(new Date());
+
+                JSONObject requestBody = new JSONObject();
+                requestBody.put("uid", uid);
+                requestBody.put("date", currentDate);
+
+                String json = NetworkHandler.post(serverURL + "/admin", requestBody.toString());
+                Log.d("DriverHome", "Response from /admin: " + json);
+
+                if (json != null && !json.startsWith("IOException")) {
+                    JSONObject jsonObject = JSON.parseObject(json);
+                    if (jsonObject.getIntValue("status_code") == 200) {
+                        if (jsonObject.containsKey("transporting_geojson")) {
+                            JSONObject transportingGeojson = jsonObject.getJSONObject("transporting_geojson");
+                            parseAndDrawGeoJson(transportingGeojson, false, boundsBuilder); // a solid line
                         }
-                } else {
-                        Toast.makeText(Driver_homeActivity.this, "网络请求失败，请检查网络连接", Toast.LENGTH_SHORT).show();
+
+                        if (jsonObject.containsKey("transferring_geojson")) {
+                            JSONObject transferringGeojson = jsonObject.getJSONObject("transferring_geojson");
+                            parseAndDrawGeoJson(transferringGeojson, true, boundsBuilder); // a dotted line
+                        }
+
+                        runOnUiThread(() -> {
+                            try {
+                                if (boundsBuilder.build().northeast != null) {
+                                     aMap.animateCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(), 150));
+                                }
+                            } catch (IllegalStateException e) {
+                                Log.e("DriverHome", "No points to build bounds", e);
+                            }
+                        });
+
+                    } else {
+                        String message = jsonObject.getString("message");
+                        runOnUiThread(() -> Toast.makeText(Driver_homeActivity.this, "获取路线失败: " + message, Toast.LENGTH_SHORT).show());
                     }
-                    });
+                } else {
+                    runOnUiThread(() -> Toast.makeText(Driver_homeActivity.this, "网络请求失败", Toast.LENGTH_SHORT).show());
+                }
             } catch (Exception e) {
-                runOnUiThread(() -> {
-                    progressDialog.dismiss();
-                    Log.e("Driver_homeActivity", "Failed to get daily tasks", e);
-                    Toast.makeText(Driver_homeActivity.this, "网络请求异常", Toast.LENGTH_SHORT).show();
-                });
+                e.printStackTrace();
+                Log.e("DriverHome", "Error getting routes", e);
+                runOnUiThread(() -> Toast.makeText(Driver_homeActivity.this, "获取路线时发生错误", Toast.LENGTH_SHORT).show());
+            } finally {
+                runOnUiThread(() -> progressDialog.dismiss());
             }
         }).start();
+    }
+
+    private void parseAndDrawGeoJson(final JSONObject geojson, final boolean isDotted, final LatLngBounds.Builder boundsBuilder) {
+        if (geojson == null) return;
+        try {
+            final JSONArray features = geojson.getJSONArray("features");
+            if (features == null || features.isEmpty()) return;
+
+            for (int i = 0; i < features.size(); i++) {
+                JSONObject feature = features.getJSONObject(i);
+                JSONObject geometry = feature.getJSONObject("geometry");
+                JSONArray multiLineString = geometry.getJSONArray("coordinates");
+                final List<LatLng> allFeaturePoints = new ArrayList<>();
+
+                for (int j = 0; j < multiLineString.size(); j++) {
+                    JSONArray lineString = multiLineString.getJSONArray(j);
+                    final List<LatLng> points = new ArrayList<>();
+                    for (int k = 0; k < lineString.size(); k++) {
+                        JSONArray coordinates = lineString.getJSONArray(k);
+                        double longitude = coordinates.getDoubleValue(0);
+                        double latitude = coordinates.getDoubleValue(1);
+                        LatLng point = new LatLng(latitude, longitude);
+                        points.add(point);
+                        boundsBuilder.include(point);
+                    }
+                    allFeaturePoints.addAll(points);
+                    runOnUiThread(() -> {
+                        if (!points.isEmpty()) {
+                            PolylineOptions polylineOptions = new PolylineOptions()
+                                    .addAll(points)
+                                    .width(10)
+                                    .color(isDotted ? Color.RED : Color.BLUE)
+                                    .setDottedLine(isDotted);
+                            aMap.addPolyline(polylineOptions);
+                        }
+                    });
+                }
+
+                runOnUiThread(() -> {
+                    if(!allFeaturePoints.isEmpty()){
+                        addMarker(allFeaturePoints.get(0), "起点", R.drawable.locationpink);
+                        addMarker(allFeaturePoints.get(allFeaturePoints.size() - 1), "终点", R.drawable.location_button);
+                    }
+                });
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e("DriverHome", "Error parsing GeoJSON", e);
+        }
+    }
+
+    private void addMarker(LatLng position, String title, int iconResId) {
+        aMap.addMarker(new MarkerOptions()
+                .position(position)
+                .title(title)
+                .icon(BitmapDescriptorFactory.fromResource(iconResId))
+        );
     }
 
     static class TaskPoint {

@@ -72,14 +72,48 @@
                 android:layout_marginTop="4dp"
                 android:text="终点: " />
 
-            <Button
-                android:id="@+id/btn_navigate"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginTop="16dp"
-                android:text="一键导航至起点"
-                android:backgroundTint="@color/primary"
-                android:textColor="@android:color/white"/>
+                android:weightSum="3">
+
+                <Button
+                    android:id="@+id/btn_navigate_to_start"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="去起点"
+                    android:textSize="12sp"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@android:color/white"
+                    android:layout_marginEnd="4dp"/>
+
+                <Button
+                    android:id="@+id/btn_navigate_to_end"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="去终点"
+                    android:textSize="12sp"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@android:color/white"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"/>
+
+                <Button
+                    android:id="@+id/btn_navigate_full_route"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="完整路线"
+                    android:textSize="12sp"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@android:color/white"
+                    android:layout_marginStart="4dp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

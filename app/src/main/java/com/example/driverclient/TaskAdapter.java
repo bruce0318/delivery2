@@ -51,14 +51,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, Driver_taskDetailActivity.class);
-            intent.putExtra("startName", task.getStartPointName());
-            intent.putExtra("endName", task.getEndPointName());
+            intent.putExtra("start_id", task.getStartId());
+            intent.putExtra("end_id", task.getEndId());
+            intent.putExtra("start_name", task.getStartPointName());
+            intent.putExtra("end_name", task.getEndPointName());
             intent.putExtra("date", task.getDate());
             intent.putExtra("order", task.getDriverOrder());
-            intent.putExtra("startX", task.getStartX());
-            intent.putExtra("startY", task.getStartY());
-            intent.putExtra("endX", task.getEndX());
-            intent.putExtra("endY", task.getEndY());
             context.startActivity(intent);
         });
     }
